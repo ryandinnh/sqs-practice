@@ -6,13 +6,7 @@ sqs = boto3.client('sqs')
 
 url = 'https://sqs.us-east-1.amazonaws.com/471112568835/myqueue'
 
-def deleteMsg(handle):
-    delete = sqs.delete_message(
-        QueueUrl = url,
-        ReceiptHandle = response['Messages'][0]['ReceiptHandle']
-    )
-
-response = sqs.receive_message(
+response = sqs.get_queue_attributes(
     QueueUrl= url,
     AttributeNames = [
         'All'
@@ -20,5 +14,3 @@ response = sqs.receive_message(
 )
 
 print(response)
-deleteMsg(handle)
-
